@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Markup Generator</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <h1>Markup Generator</h1>
+        <h2>Call Your Representatives Form</h2>
+        <form>
+            <fieldset>
+            <p>
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" required />
+            </p>
+            <p>
+                <label for="recommending-organizing">Recommending Organization</label> <input type="text" id="rec" required />
+            </p>
+            <p>
+                <legend for="who-to-call">Who To Call</legend>
+                <input type="checkbox" id="call-rep" value="Representatives"> <label for="call-rep">Representatives</label>
+                <input type="checkbox" id="call-senators" value="Senators"> <label for="call-senators">Senator</label>
+            </p>
+            <p>
+                <!-- onclick add bullet, call func to add new text field before button-->
+                <label for="cta">Call to Action</label> <input type="text" id="cta" required> <input type="button" value="Add Bullet">
+            </p>
+            <p>
+                <!-- if moreinfo empty, leave out of final markup -->
+                <!-- onclick add bullet, call func to add new text field before button-->
+                <label for="more-info">More Info</label> <input type="text" id="more-info"> <input type="button" value="Add Bullet">
+            </p>
+            </fieldset>
+            <p>
+                <!-- onclick add topic, insert another fieldset-->
+                <button>Add Another Topic</button> <button type="submit">Generate Markup</button>
+            </p>
+        </form>
+        <section id="markup">
+            <!-- <p>*Call Your Reps*</p>
+            <p>*_Topic_*</p>
+            <p>_Recommending Organization:_ something</p>
+            <p>_Who To Call:_ Senators, Reps</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;- something</p>
+            <p>_CTA:_ DO A THING</p>
+            <p>_Impact:_ something something</p>
+            <p>More Info:</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;- blah</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;- blah</p> -->
+        </section>
+        <script src="app.js" defer></script>
+    </body>
+</html>
