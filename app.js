@@ -59,9 +59,14 @@ function storeNewTopic() {
     // Store the updated array back in the storage.
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(topics));
 
-    // // TODO: Grey out that form
-    // // TODO: Dispaly edit button
+    // disable form 
+    const fieldsets = document.getElementsByTagName("fieldset");
+    let fieldset = fieldsets[fieldsets.length-1];
+    fieldset.setAttribute("disabled","");
 
+    // enable edit button
+    const editBtn = document.getElementById("edit-call-reps");
+    editBtn.removeAttribute("disabled");
 
     console.log('NEW TOPIC STORED');
 }
