@@ -40,6 +40,14 @@ function storeNewTopic() {
     const callSenator = callSenatorElem.checked;
     const cta = ctaElem.value;
     const moreInfo = moreInfoElem.value;
+
+    if(!callReps && !callSenator) {
+        // display error message
+        console.log('At least one checkbox required.');
+        var popup = document.getElementById("call-reps-popup");
+        popup.classList.toggle("show");
+        return;
+    }
     
     // Get data from storage.
     const topics = getAllStoredTopics();
@@ -53,6 +61,7 @@ function storeNewTopic() {
 
     // // TODO: Grey out that form
     // // TODO: Dispaly edit button
+
 
     console.log('NEW TOPIC STORED');
 }
