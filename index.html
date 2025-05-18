@@ -12,16 +12,15 @@
         <form>
             <fieldset>
             <p>
-                <label for="subject">Subject</label>
-                <input type="text" id="subject" required />
+                <label for="subject">Subject</label> <input type="text" id="subject" required />
             </p>
             <p>
                 <label for="recommending-organizing">Recommending Organization</label> <input type="text" id="rec" required />
             </p>
             <p>
                 <legend for="who-to-call">Who To Call</legend>
-                <input type="checkbox" id="call-rep" value="Representatives"> <label for="call-rep">Representatives</label>
-                <input type="checkbox" id="call-senators" value="Senators"> <label for="call-senators">Senator</label>
+                <input type="checkbox" id="call-reps" value="Representatives"> <label for="call-reps">Representatives</label>
+                <input type="checkbox" id="call-senator" value="Senator"> <label for="call-senator">Senator</label>
             </p>
             <p>
                 <!-- onclick add bullet, call func to add new text field before button-->
@@ -35,7 +34,7 @@
             </fieldset>
             <p>
                 <!-- onclick add topic, insert another fieldset-->
-                <button>Add Another Topic</button> <button type="submit">Generate Markup</button>
+                <button type="submit" id="add-topic">Add Another Topic</button> <button type="submit" id="gen-markup">Generate Markup</button>
             </p>
         </form>
         <section id="markup">
