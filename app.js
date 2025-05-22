@@ -7,16 +7,6 @@ let topics = [];
 // create constants for the form and the form controls
 const fieldsets = document.getElementsByTagName("fieldset");
 const editBtn = document.getElementById("edit-call-reps");
-const subjectElem = document.getElementById("subject");
-const recommendingOrgElem = document.getElementById("rec");
-const callRepElem = document.getElementById("call-reps");
-const callSenatorElem = document.getElementById("call-senator");
-const ctaElem = document.getElementById("cta");
-const moreInfoElem = document.getElementById("more-info");
-
-const moreInfoBullets = moreInfoElem.children;
-const ctaBullets = ctaElem.children;
-
 
 // Listen to form submissions
 callRepForm.addEventListener("submit", (event) => {
@@ -51,15 +41,19 @@ function enableFields() {
 
 function storeNewTopic() {
     console.log('STORE NEW TOPIC CALLED');
-    // Get the start and end dates from the form.
-    const subject = subjectElem.value;
-    const recommendingOrg = recommendingOrgElem.value;
-    const callReps = callRepElem.checked;
-    const callSenator = callSenatorElem.checked;
-    const cta = ctaElem.value;
-    const moreInfo = moreInfoElem.value;
+    let fieldsToStore = document.getElementById(topics.length);
 
-    if(!callReps && !callSenator) {
+    const subject = fieldsToStore.children[0].children[1].value;
+    const recommendingOrg = fieldsToStore.children[1].children[1].value;
+    const callRep = fieldsToStore.children[4].checked;
+    const callSenators = fieldsToStore.children[6].checked;
+    const cta = fieldsToStore.children[9].children[1].value;
+    const moreInfo = fieldsToStore.children[10].children[1].value;
+    // const moreInfoBullets = moreInfoElem.children;
+    // const ctaBullets = ctaElem.children;
+
+
+    if(!callRep && !callSenators) {
         // display error message
         console.log('At least one checkbox required.');
         var popup = document.getElementById("call-reps-popup");
@@ -71,7 +65,7 @@ function storeNewTopic() {
     // const topics = getAllStoredTopics();
 
     // Add the new topic object to the end of the array of topic objects.
-    topics.push({subject, recommendingOrg, callReps, callSenator, cta, moreInfo});
+    topics.push({subject, recommendingOrg, callRep, callSenators, cta, moreInfo});
     console.log(topics);
 
     // Store the updated array back in the storage.

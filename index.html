@@ -9,7 +9,7 @@
     <body>
         <h1>Markup Generator</h1>
         <h2>Call Your Representatives Form</h2>
-        <form>
+        <form id="callRepsForm">
             <!-- <button type="button" id="edit-call-reps" onclick="enableFields()" disabled>Edit</button> -->
             <fieldset id="0">
                 <p>
@@ -21,8 +21,8 @@
                 <p>
                     <legend for="who-to-call">Who To Call</legend>
                     <p class="popuptext" id="call-reps-popup">Please choose at least one.</p>
-                    <input type="checkbox" id="call-reps" value="Representatives"> <label for="call-reps">Representatives</label>
-                    <input type="checkbox" id="call-senator" value="Senator"> <label for="call-senator">Senator</label>
+                    <input type="checkbox" id="call-rep" value="Representative"> <label for="call-rep">Representative</label>
+                    <input type="checkbox" id="call-senators" value="Senators"> <label for="call-senators">Senators</label>
                 </p>
                 <p>
                     <!-- onclick add bullet, call func to add new text field before button-->
