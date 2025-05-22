@@ -1,0 +1,23 @@
+<fieldset>
+    <p>
+        <label for="subject">Subject</label> <input type="text" id="subject" required />
+    </p>
+    <p>
+        <label for="rec">Recommending Organization</label> <input type="text" id="rec" required />
+    </p>
+    <p>
+        <legend for="who-to-call">Who To Call</legend>
+        <p class="popuptext" id="call-reps-popup">Please choose at least one.</p>
+        <input type="checkbox" id="call-reps" value="Representatives"> <label for="call-reps">Representatives</label>
+        <input type="checkbox" id="call-senator" value="Senator"> <label for="call-senator">Senator</label>
+    </p>
+    <p>
+        <!-- onclick add bullet, call func to add new text field before button-->
+        <label for="cta">Call to Action</label> <input type="text" id="cta" required> <input type="button" value="Add Bullet">
+    </p>
+    <p>
+        <!-- if moreinfo empty, leave out of final markup -->
+        <!-- onclick add bullet, call func to add new text field before button-->
+        <label for="more-info">More Info</label> <input type="text" id="more-info"> <input type="button" value="Add Bullet">
+    </p>
+</fieldset>
