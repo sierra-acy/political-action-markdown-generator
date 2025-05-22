@@ -41,6 +41,36 @@ function enableFields(event) {
 
 }
 
+function saveFields(event) {
+    console.log("SAVE CLICKED");
+    const currId = event.target.name;
+    let fieldsToStore = document.getElementById(currId);
+    
+    let dataObj = getFieldValues(fieldsToStore);
+
+    if(!validateCheckboxes(dataObj)) {
+        return;
+    }
+
+    // replace stored topic with new values
+    topics[currId] = dataObj;
+
+    console.log(topics);
+
+    // disable form 
+    fieldsToStore.setAttribute("disabled","");
+
+    // hide save
+    let saveBtn = document.getElementsByName(currId)[1];
+    saveBtn.setAttribute("class", "hidden");
+
+    // enable edit button
+    let editBtn = document.getElementsByName(currId)[0];
+    editBtn.removeAttribute("disabled");
+}
+
+
+
 function storeNewTopic() {
     console.log('STORE NEW TOPIC CALLED');
     const currId = topics.length;
@@ -82,6 +112,28 @@ function storeNewTopic() {
     editBtn.removeAttribute("disabled");
 
     console.log('NEW TOPIC STORED');
+}
+
+function getFieldValues(fieldsToStore) {
+    const subject = fieldsToStore.children[0].children[1].value;
+    const recommendingOrg = fieldsToStore.children[1].children[1].value;
+    const callRep = fieldsToStore.children[4].checked;
+    const callSenators = fieldsToStore.children[6].checked;
+    const cta = fieldsToStore.children[9].children[1].value;
+    const moreInfo = fieldsToStore.children[10].children[1].value;
+
+    return {subject, recommendingOrg, callRep, callSenators, cta, moreInfo};
+}
+
+function validateCheckboxes(dataObj){ // validate checkboxes
+    if(!dataObj["callRep"] && !dataObj["callSenators"]) {
+        // display error message
+        console.log('At least one checkbox required.');
+        var popup = document.getElementById("call-reps-popup");
+        popup.classList.toggle("show");
+        return false;
+    }
+    return true;
 }
 
 function getAllStoredTopics() {
