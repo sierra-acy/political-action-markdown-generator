@@ -1,4 +1,8 @@
 
+.hidden {
+  display:none;
+}
+
 /* The actual popup (appears on top) */
 .popuptext {
   display:none;

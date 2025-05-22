@@ -34,6 +34,11 @@ function enableFields(event) {
     
     // disable edit button
     event.target.setAttribute("disabled", "");
+
+    // show save button
+    let saveBtn = document.getElementsByName(event.target.name)[1];
+    saveBtn.removeAttribute("class");
+
 }
 
 function storeNewTopic() {
@@ -100,9 +105,12 @@ async function addTopicForm(url, elementId) {
     const nextId = topics.length;
     let html = await response.text();
     
-    // insert name attribute to Edit button
-    const index = html.indexOf("disabled");
+    // insert name attribute to Edit and Save buttons
+    let index = html.indexOf("disabled");
     html = html.substring(0,index) + "name='" + nextId + "' " + html.substring(index);
+    
+    index = html.indexOf(">Save<");
+    html = html.substring(0,index) + " name='" + nextId + "'" + html.substring(index);
 
     // insert fieldset into document
     document.getElementById(elementId).insertAdjacentHTML('afterend', html);
