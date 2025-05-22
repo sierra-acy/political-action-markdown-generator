@@ -3,6 +3,8 @@ const STORAGE_KEY = "markup-generator";
 
 // create constants for the form and the form controls
 const newCallRepForm = document.getElementsByTagName("form")[0];
+const fieldsets = document.getElementsByTagName("fieldset");
+const editBtn = document.getElementById("edit-call-reps");
 const subjectElem = document.getElementById("subject");
 const recommendingOrgElem = document.getElementById("rec");
 const callRepElem = document.getElementById("call-reps");
@@ -30,6 +32,17 @@ newCallRepForm.addEventListener("submit", (event) => {
         // generateMarkup();
     }
 });
+
+// Listen to form submissions
+function enableForm() {
+    console.log('EDIT PRESSED');
+    let fieldset = fieldsets[0];
+    // enable form
+    fieldset.removeAttribute("disabled");
+
+    // disable edit button
+    editBtn.setAttribute("disabled", "");
+}
 
 function storeNewTopic() {
     console.log('STORE NEW TOPIC CALLED');
@@ -60,12 +73,10 @@ function storeNewTopic() {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(topics));
 
     // disable form 
-    const fieldsets = document.getElementsByTagName("fieldset");
     let fieldset = fieldsets[fieldsets.length-1];
     fieldset.setAttribute("disabled","");
 
     // enable edit button
-    const editBtn = document.getElementById("edit-call-reps");
     editBtn.removeAttribute("disabled");
 
     console.log('NEW TOPIC STORED');
