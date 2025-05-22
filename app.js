@@ -4,10 +4,6 @@ const callRepForm = document.getElementsByTagName("form")[0];
 
 let topics = [];
 
-// create constants for the form and the form controls
-const fieldsets = document.getElementsByTagName("fieldset");
-const editBtn = document.getElementById("edit-call-reps");
-
 // Listen to form submissions
 callRepForm.addEventListener("submit", (event) => {
     // Prevent the form from submitting to the server
@@ -29,9 +25,12 @@ callRepForm.addEventListener("submit", (event) => {
 });
 
 // Listen to form submissions
-function enableFields() {
-    // console.log('EDIT PRESSED');
-    // let fieldset = fieldsets[0];
+function enableFields(event) {
+    console.log('EDIT PRESSED');
+    console.log(event.target.name);
+
+
+    // get fieldsets
     // // enable form
     // fieldset.removeAttribute("disabled");
 
@@ -41,7 +40,8 @@ function enableFields() {
 
 function storeNewTopic() {
     console.log('STORE NEW TOPIC CALLED');
-    let fieldsToStore = document.getElementById(topics.length);
+    const currId = topics.length;
+    let fieldsToStore = document.getElementById(currId);
 
     const subject = fieldsToStore.children[0].children[1].value;
     const recommendingOrg = fieldsToStore.children[1].children[1].value;
@@ -72,11 +72,11 @@ function storeNewTopic() {
     // window.localStorage.setItem(STORAGE_KEY, JSON.stringify(topics));
 
     // disable form 
-    let fieldset = fieldsets[fieldsets.length-1];
-    fieldset.setAttribute("disabled","");
+    fieldsToStore.setAttribute("disabled","");
 
     // enable edit button
-    // editBtn.removeAttribute("disabled");
+    let editBtn = document.getElementsByName(currId)[0];
+    editBtn.removeAttribute("disabled");
 
     console.log('NEW TOPIC STORED');
 }
@@ -98,14 +98,21 @@ async function addTopicForm(url, elementId) {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const html = await response.text();
-    // insert new fields
+    // prep next id
+    const nextId = topics.length;
+    let html = await response.text();
+    
+    // insert name attribute to Edit button
+    const index = html.indexOf("disabled");
+    html = html.substring(0,index) + "name='" + nextId + "' " + html.substring(index);
+
+    // insert fieldset into document
     document.getElementById(elementId).insertAdjacentHTML('afterend', html);
 
     // get new fields and set id to next number
     const fieldsets = document.getElementsByTagName('fieldset');
     let newFieldset = fieldsets[fieldsets.length-1];
-    newFieldset.id = topics.length;
+    newFieldset.id = nextId;
   } catch (error) {
     console.error('Failed to fetch HTML:', error);
   }
