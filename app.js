@@ -32,8 +32,8 @@ function enableFields(event) {
     let fieldset = document.getElementById(event.target.name);
     fieldset.removeAttribute("disabled");
     
-    // disable edit button
-    event.target.setAttribute("disabled", "");
+    // hide edit button
+    event.target.setAttribute("class", "hidden");
 
     // show save button
     let saveBtn = document.getElementsByName(event.target.name)[1];
@@ -64,9 +64,9 @@ function saveFields(event) {
     let saveBtn = document.getElementsByName(currId)[1];
     saveBtn.setAttribute("class", "hidden");
 
-    // enable edit button
+    // show edit button
     let editBtn = document.getElementsByName(currId)[0];
-    editBtn.removeAttribute("disabled");
+    editBtn.removeAttribute("class");
 }
 
 
@@ -109,7 +109,7 @@ function storeNewTopic() {
 
     // enable edit button
     let editBtn = document.getElementsByName(currId)[0];
-    editBtn.removeAttribute("disabled");
+    editBtn.removeAttribute("class");
 
     console.log('NEW TOPIC STORED');
 }
@@ -158,8 +158,8 @@ async function addTopicForm(url, elementId) {
     let html = await response.text();
     
     // insert name attribute to Edit and Save buttons
-    let index = html.indexOf("disabled");
-    html = html.substring(0,index) + "name='" + nextId + "' " + html.substring(index);
+    let index = html.indexOf(">Edit<");
+    html = html.substring(0,index) + " name='" + nextId + "'" + html.substring(index);
     
     index = html.indexOf(">Save<");
     html = html.substring(0,index) + " name='" + nextId + "'" + html.substring(index);
