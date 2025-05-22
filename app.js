@@ -10,8 +10,7 @@ callRepForm.addEventListener("submit", (event) => {
     // since everything is client-side.
     event.preventDefault();
 
-    console.log('SUBMIT PRESSED');
-    console.log('EVENT: ');
+    console.log('SUBMIT EVENT');
     console.log(event);
 
     storeNewTopic();
@@ -29,13 +28,12 @@ function enableFields(event) {
     console.log('EDIT PRESSED');
     console.log(event.target.name);
 
-
-    // get fieldsets
-    // // enable form
-    // fieldset.removeAttribute("disabled");
-
-    // // disable edit button
-    // editBtn.setAttribute("disabled", "");
+    // enable form
+    let fieldset = document.getElementById(event.target.name);
+    fieldset.removeAttribute("disabled");
+    
+    // disable edit button
+    event.target.setAttribute("disabled", "");
 }
 
 function storeNewTopic() {
