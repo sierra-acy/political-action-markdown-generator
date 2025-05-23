@@ -170,37 +170,74 @@ async function addTopicForm(url, elementId) {
 }
 
 function generateMarkup() {
-    // slack
-    let text = "*Call Your Reps*\n";
-    
+    let slackText = "*Call Your Reps*\n";
+    let discordText = "# **Call Your Reps**\n";
+
+    let curr = 1;
     topics.forEach(function(topic) {
         console.log("TOPIC ", topic);
-        text += "_*" + topic['subject'] + "*_\n";
-        text += " _Recommending Organization:_ " + topic['recommendingOrg'] + "\n";
-        let whoToCall = "";
-        if(topic['callRep']) {
-            whoToCall += "Representative";
-        }
-        if(topic['callSenators']) {
-            if(whoToCall !== "") {
-                whoToCall += ", ";
-            }
-            whoToCall += "Senators";
-        }
-        text += " _Who to Call:_ " + whoToCall + "\n";
-        text += " _CTA:_ " + topic['cta'] + "\n";
-        if(topic["moreInfo"] !== "") {
-            text += " _More Info:_ " + topic['moreInfo'] + "\n";
-        }
-        text+= "\n";
+        slackText += slackMarkup(topic); 
+        discordText += discordMarkup(topic, curr, topics.length);
+        
+        curr++;
     });
 
     const slackNode = document.createElement("code");
-    slackNode.innerText = text;
-
+    slackNode.innerText = slackText;
     let slackOut = document.getElementById("slack");
     slackOut.appendChild(slackNode);
 
+    const discordNode = document.createElement("code");
+    discordNode.innerText = discordText;
+    let discordOut = document.getElementById("discord");
+    discordOut.appendChild(discordNode);
+
     let output = document.getElementById("markup");
     output.removeAttribute("class");
+}
+
+function slackMarkup(topic) {
+    let text = "";
+    text += "_*" + topic['subject'] + "*_\n";
+    text += " _Recommending Organization:_ " + topic['recommendingOrg'] + "\n";
+    let whoToCall = "";
+    if(topic['callRep']) {
+        whoToCall += "Representative";
+    }
+    if(topic['callSenators']) {
+        if(whoToCall !== "") {
+            whoToCall += ", ";
+        }
+        whoToCall += "Senators";
+    }
+    text += " _Who to Call:_ " + whoToCall + "\n";
+    text += " _CTA:_ " + topic['cta'] + "\n";
+    if(topic["moreInfo"] !== "") {
+        text += " _More Info:_ " + topic['moreInfo'] + "\n";
+    }
+    text+= "\n";
+    return text;
+}
+
+function discordMarkup(topic, curr, total) {
+    let text = "";
+    text += "## (" + curr + "/" + total + ") **" + topic['subject'] + "**\n";
+    text += " _**Recommending Organization:**_ " + topic['recommendingOrg'] + "\n";
+    let whoToCall = "";
+    if(topic['callRep']) {
+        whoToCall += "Representative";
+    }
+    if(topic['callSenators']) {
+        if(whoToCall !== "") {
+            whoToCall += ", ";
+        }
+        whoToCall += "Senators";
+    }
+    text += " _**Who to Call:**_ " + whoToCall + "\n";
+    text += " _**CTA:**_ " + topic['cta'] + "\n";
+    if(topic["moreInfo"] !== "") {
+        text += " _**More Info:**_ " + topic['moreInfo'] + "\n";
+    }
+    text+= "\n";
+    return text;
 }
