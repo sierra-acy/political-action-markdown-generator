@@ -80,30 +80,19 @@ function storeNewTopic() {
     const currId = topics.length;
     let fieldsToStore = document.getElementById(currId);
 
-    const subject = fieldsToStore.children[0].children[1].value;
-    const recommendingOrg = fieldsToStore.children[1].children[1].value;
-    const callRep = fieldsToStore.children[4].checked;
-    const callSenators = fieldsToStore.children[6].checked;
-    const cta = fieldsToStore.children[9].children[1].value;
-    const moreInfo = fieldsToStore.children[10].children[1].value;
+    let fieldData = getFieldValues(fieldsToStore)
     // const moreInfoBullets = moreInfoElem.children;
     // const ctaBullets = ctaElem.children;
 
-    const popup = fieldsToStore.children[3];
-
-
-    if(!callRep && !callSenators) {
-        // display error message
-        console.log('At least one checkbox required.');
-        popup.classList.toggle("show");
-        return false;
+    if(!validateCheckboxes(fieldData)) {
+        return;
     }
     
     // Get data from storage.
     // const topics = getAllStoredTopics();
 
     // Add the new topic object to the end of the array of topic objects.
-    topics.push({subject, recommendingOrg, callRep, callSenators, cta, moreInfo});
+    topics.push(fieldData);
     console.log(topics);
 
     // Store the updated array back in the storage.
@@ -127,15 +116,16 @@ function getFieldValues(fieldsToStore) {
     const callSenators = fieldsToStore.children[6].checked;
     const cta = fieldsToStore.children[9].children[1].value;
     const moreInfo = fieldsToStore.children[10].children[1].value;
+    const popup = fieldsToStore.children[3];
 
-    return {subject, recommendingOrg, callRep, callSenators, cta, moreInfo};
+    return {subject, recommendingOrg, callRep, callSenators, cta, moreInfo, popup};
 }
 
 function validateCheckboxes(dataObj){ // validate checkboxes
     if(!dataObj["callRep"] && !dataObj["callSenators"]) {
         // display error message
         console.log('At least one checkbox required.');
-        var popup = document.getElementById("call-reps-popup");
+        const popup = dataObj["popup"];
         popup.classList.toggle("show");
         return false;
     }
