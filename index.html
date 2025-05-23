@@ -40,17 +40,13 @@
                 <button type="submit" id="add-topic">Add Another Topic</button> <button type="submit" id="gen-markup">Generate Markup</button>
             </p>
         </form>
-        <section id="markup">
-            <!-- <p>*Call Your Reps*</p>
-            <p>*_Topic_*</p>
-            <p>_Recommending Organization:_ something</p>
-            <p>_Who To Call:_ Senators, Reps</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;- something</p>
-            <p>_CTA:_ DO A THING</p>
-            <p>_Impact:_ something something</p>
-            <p>More Info:</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;- blah</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;- blah</p> -->
+        <section id="markup" class="hidden">
+            <label for="slack">Slack</label>
+            <div class="markup" id="slack"></div>
+            <label for="discord">Discord</label>
+            <div class="markup" id="discord"></div>
+            <label for="gmail">Gmail</label>
+            <div class="markup" id="gmail"></div>
         </section>
         <script src="app.js" defer></script>
     </body>

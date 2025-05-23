@@ -195,10 +195,12 @@ function generateMarkup() {
         text+= "\n";
     });
 
-    const slackNode = document.createElement("p");
+    const slackNode = document.createElement("code");
     slackNode.innerText = text;
-    slackNode.setAttribute("id", "slack");
+
+    let slackOut = document.getElementById("slack");
+    slackOut.appendChild(slackNode);
 
     let output = document.getElementById("markup");
-    output.appendChild(slackNode);
+    output.removeAttribute("class");
 }
