@@ -1,5 +1,5 @@
 // Add the storage key as an app-wide constant
-const STORAGE_KEY = "markup-generator";
+const STORAGE_KEY = "markdown-generator";
 const callRepForm = document.getElementsByTagName("form")[0];
 
 let topics = [];
@@ -15,9 +15,9 @@ callRepForm.addEventListener("submit", (event) => {
         return;
     }
 
-    if(event.submitter.id === 'gen-markup') {
+    if(event.submitter.id === 'gen-markdown') {
         console.log('GEN MARKUP PRESSED');
-        generateMarkup();
+        generateMarkdown();
     } else {
         console.log('ADD TOPIC PRESSED');
         addTopicForm('callRepsFieldset.html', topics.length-1);
@@ -169,7 +169,7 @@ async function addTopicForm(url, elementId) {
   }
 }
 
-function generateMarkup() {
+function generateMarkdown() {
     let slackText = "*Call Your Reps*\n";
     let discordText = "# **Call Your Reps**\n";
 
@@ -181,8 +181,8 @@ function generateMarkup() {
     let curr = 1;
     topics.forEach(function(topic) {
         console.log("TOPIC ", topic);
-        slackText += slackMarkup(topic); 
-        discordText += discordMarkup(topic, curr, topics.length);
+        slackText += slackMarkdown(topic); 
+        discordText += discordMarkdown(topic, curr, topics.length);
         gmailOut.appendChild(gmailMarkdown(topic));
         curr++;
     });
@@ -197,11 +197,11 @@ function generateMarkup() {
     let discordOut = document.getElementById("discord");
     discordOut.appendChild(discordNode);
     
-    let output = document.getElementById("markup");
+    let output = document.getElementById("markdown");
     output.removeAttribute("class");
 }
 
-function slackMarkup(topic) {
+function slackMarkdown(topic) {
     let text = "";
     text += "_*" + topic['subject'] + "*_\n";
     text += " _Recommending Organization:_ " + topic['recommendingOrg'] + "\n";
@@ -224,7 +224,7 @@ function slackMarkup(topic) {
     return text;
 }
 
-function discordMarkup(topic, curr, total) {
+function discordMarkdown(topic, curr, total) {
     let text = "";
     text += "## (" + curr + "/" + total + ") **" + topic['subject'] + "**\n";
     text += " _**Recommending Organization:**_ " + topic['recommendingOrg'] + "\n";

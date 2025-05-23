@@ -3,11 +3,11 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
-        <title>Markup Generator</title>
+        <title>Markdown Generator</title>
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <h1>Markup Generator</h1>
+        <h1>Markdown Generator</h1>
         <h2>Call Your Representatives Form</h2>
         <form id="callRepsForm">
             <button class="hidden" type="button" id="edit-call-reps" onclick="enableFields(event)" name="0">Edit</button>
@@ -30,23 +30,22 @@
                     <label for="cta">Call to Action</label> <input type="text" id="cta" required> <input type="button" value="Add Bullet">
                 </p>
                 <p>
-                    <!-- if moreinfo empty, leave out of final markup -->
                     <!-- onclick add bullet, call func to add new text field before button-->
                     <label for="more-info">More Info</label> <input type="text" id="more-info"> <input type="button" value="Add Bullet">
                 </p>
             </fieldset>
             <p>
                 <!-- onclick add topic, insert another fieldset-->
-                <button type="submit" id="add-topic">Add Another Topic</button> <button type="submit" id="gen-markup">Generate Markup</button>
+                <button type="submit" id="add-topic">Add Another Topic</button> <button type="submit" id="gen-markdown">Generate Markdown</button>
             </p>
         </form>
-        <section id="markup" class="hidden">
+        <section id="markdown" class="hidden">
             <label for="slack">Slack</label>
-            <div class="markup" id="slack"></div>
+            <div class="markdown" id="slack"></div>
             <label for="discord">Discord</label>
-            <div class="markup" id="discord"></div>
+            <div class="markdown" id="discord"></div>
             <label for="gmail">Gmail</label>
-            <div class="markup" id="gmail"></div>
+            <div class="markdown" id="gmail"></div>
         </section>
         <script src="app.js" defer></script>
     </body>
