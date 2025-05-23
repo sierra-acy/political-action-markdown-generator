@@ -13,7 +13,11 @@ callRepForm.addEventListener("submit", (event) => {
     console.log('SUBMIT EVENT');
     console.log(event);
 
-    storeNewTopic();
+    // if store new topic fails, don't move forward
+    if(!storeNewTopic()) {
+        return;
+    }
+
     if(event.submitter.id === 'gen-markup') {
         console.log('GEN MARKUP PRESSED');
         // generateMarkup();
@@ -85,13 +89,14 @@ function storeNewTopic() {
     // const moreInfoBullets = moreInfoElem.children;
     // const ctaBullets = ctaElem.children;
 
+    const popup = fieldsToStore.children[3];
+
 
     if(!callRep && !callSenators) {
         // display error message
         console.log('At least one checkbox required.');
-        var popup = document.getElementById("call-reps-popup");
         popup.classList.toggle("show");
-        return;
+        return false;
     }
     
     // Get data from storage.
@@ -112,6 +117,7 @@ function storeNewTopic() {
     editBtn.removeAttribute("class");
 
     console.log('NEW TOPIC STORED');
+    return true;
 }
 
 function getFieldValues(fieldsToStore) {
