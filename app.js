@@ -173,12 +173,17 @@ function generateMarkup() {
     let slackText = "*Call Your Reps*\n";
     let discordText = "# **Call Your Reps**\n";
 
+    let gmailTitle = document.createElement("p");
+    gmailTitle.innerHTML = "<b>Call Your Reps<b>";
+    let gmailOut = document.getElementById("gmail");
+    gmailOut.appendChild(gmailTitle);
+
     let curr = 1;
     topics.forEach(function(topic) {
         console.log("TOPIC ", topic);
         slackText += slackMarkup(topic); 
         discordText += discordMarkup(topic, curr, topics.length);
-        
+        gmailOut.appendChild(gmailMarkdown(topic));
         curr++;
     });
 
@@ -191,7 +196,7 @@ function generateMarkup() {
     discordNode.innerText = discordText;
     let discordOut = document.getElementById("discord");
     discordOut.appendChild(discordNode);
-
+    
     let output = document.getElementById("markup");
     output.removeAttribute("class");
 }
@@ -240,4 +245,40 @@ function discordMarkup(topic, curr, total) {
     }
     text+= "\n";
     return text;
+}
+
+function gmailMarkdown(topic) {
+    let topLevel = document.createElement("p");
+    topLevel.innerHTML = "<b><i>" + topic['subject'] + "</i></b>";
+
+    let details = document.createElement("ul");
+
+    let recOrg = document.createElement("li");
+    recOrg.innerHTML = "<i>Recommending Organization:</i> " + topic["recommendingOrg"];
+    details.appendChild(recOrg);
+
+    let who = "";
+    if(topic['callRep']) {
+        who += "Representative";
+    }
+    if(topic['callSenators']) {
+        if(who !== "") {
+            who += ", ";
+        }
+        who += "Senators";
+    }
+    let whoToCall = document.createElement("li");
+    whoToCall.innerHTML = "<i>Who To Call:</i> " + who;
+    details.appendChild(whoToCall);
+
+    let cta = document.createElement("li");
+    cta.innerHTML = "<i>CTA:</i> " + topic["cta"];
+    details.appendChild(cta);
+
+    let moreInfo = document.createElement("li");
+    moreInfo.innerHTML = "<i>More Info:</i> " + topic["moreInfo"];
+    details.appendChild(moreInfo);
+
+    topLevel.appendChild(details);
+    return topLevel;
 }
