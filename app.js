@@ -10,9 +10,6 @@ callRepForm.addEventListener("submit", (event) => {
     // since everything is client-side.
     event.preventDefault();
 
-    console.log('SUBMIT EVENT');
-    console.log(event);
-
     // if store new topic fails, don't move forward
     if(!storeNewTopic()) {
         return;
@@ -20,7 +17,7 @@ callRepForm.addEventListener("submit", (event) => {
 
     if(event.submitter.id === 'gen-markup') {
         console.log('GEN MARKUP PRESSED');
-        // generateMarkup();
+        generateMarkup();
     } else {
         console.log('ADD TOPIC PRESSED');
         addTopicForm('callRepsFieldset.html', topics.length-1);
@@ -170,4 +167,38 @@ async function addTopicForm(url, elementId) {
   } catch (error) {
     console.error('Failed to fetch HTML:', error);
   }
+}
+
+function generateMarkup() {
+    // slack
+    let text = "*Call Your Reps*\n";
+    
+    topics.forEach(function(topic) {
+        console.log("TOPIC ", topic);
+        text += "_*" + topic['subject'] + "*_\n";
+        text += " _Recommending Organization:_ " + topic['recommendingOrg'] + "\n";
+        let whoToCall = "";
+        if(topic['callRep']) {
+            whoToCall += "Representative";
+        }
+        if(topic['callSenators']) {
+            if(whoToCall !== "") {
+                whoToCall += ", ";
+            }
+            whoToCall += "Senators";
+        }
+        text += " _Who to Call:_ " + whoToCall + "\n";
+        text += " _CTA:_ " + topic['cta'] + "\n";
+        if(topic["moreInfo"] !== "") {
+            text += " _More Info:_ " + topic['moreInfo'] + "\n";
+        }
+        text+= "\n";
+    });
+
+    const slackNode = document.createElement("p");
+    slackNode.innerText = text;
+    slackNode.setAttribute("id", "slack");
+
+    let output = document.getElementById("markup");
+    output.appendChild(slackNode);
 }
