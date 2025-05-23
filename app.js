@@ -109,13 +109,15 @@ function storeNewTopic() {
 function getFieldValues(fieldsToStore) {
     const subject = fieldsToStore.children[0].children[1].value;
     const recommendingOrg = fieldsToStore.children[1].children[1].value;
+    const popup = fieldsToStore.children[3];
     const callRep = fieldsToStore.children[4].checked;
     const callSenators = fieldsToStore.children[6].checked;
     const cta = fieldsToStore.children[9].children[1].value;
-    const moreInfo = fieldsToStore.children[10].children[1].value;
-    const popup = fieldsToStore.children[3];
+    const impact = fieldsToStore.children[10].children[1].value;
+    const moreInfo = fieldsToStore.children[11].children[1].value;
+    
 
-    return {subject, recommendingOrg, callRep, callSenators, cta, moreInfo, popup};
+    return {subject, recommendingOrg, callRep, callSenators, cta, impact, moreInfo, popup};
 }
 
 function validateCheckboxes(dataObj){ // validate checkboxes
@@ -217,6 +219,9 @@ function slackMarkdown(topic) {
     }
     text += " _Who to Call:_ " + whoToCall + "\n";
     text += " _CTA:_ " + topic['cta'] + "\n";
+    if(topic["impact"] !== "") {
+        text += " _Impact:_ " + topic['impact'] + "\n";
+    }
     if(topic["moreInfo"] !== "") {
         text += " _More Info:_ " + topic['moreInfo'] + "\n";
     }
@@ -240,6 +245,9 @@ function discordMarkdown(topic, curr, total) {
     }
     text += " _**Who to Call:**_ " + whoToCall + "\n";
     text += " _**CTA:**_ " + topic['cta'] + "\n";
+    if(topic["impact"] !== "") {
+        text += " _**Impact:**_ " + topic['impact'] + "\n";
+    }
     if(topic["moreInfo"] !== "") {
         text += " _**More Info:**_ " + topic['moreInfo'] + "\n";
     }
@@ -274,6 +282,10 @@ function gmailMarkdown(topic) {
     let cta = document.createElement("li");
     cta.innerHTML = "<i>CTA:</i> " + topic["cta"];
     details.appendChild(cta);
+
+    let impact = document.createElement("li");
+    impact.innerHTML = "<i>Impact:</i> " + topic["impact"];
+    details.appendChild(impact);
 
     let moreInfo = document.createElement("li");
     moreInfo.innerHTML = "<i>More Info:</i> " + topic["moreInfo"];
