@@ -235,7 +235,7 @@ function slackMarkdown(topic) {
     let ctaInfo = topic['ctaInfo']
     if(ctaInfo.length > 0) {
         for(let bullet of ctaInfo) {
-            text += "    - " + bullet + "\n";
+            text += bullet + "\n";
         }
     }
     if(topic["impact"] !== "") {
@@ -247,7 +247,7 @@ function slackMarkdown(topic) {
     let moreInfoItems = topic['moreInfoItems']
     if(moreInfoItems.length > 0) {
         for(let bullet of moreInfoItems) {
-            text += "    - " + bullet + "\n";
+            text += bullet + "\n";
         }
     }
     text+= "\n";
