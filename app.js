@@ -242,7 +242,7 @@ function slackMarkdown(topic) {
         text += " _Impact:_ " + topic['impact'] + "\n";
     }
     if(topic["moreInfo"] !== "") {
-        text += " _More Info:_ " + topic['moreInfo'] + "\n";
+        text += "[More Info](" + topic['moreInfo'] + ")\n";
     }
     let moreInfoItems = topic['moreInfoItems']
     if(moreInfoItems.length > 0) {
@@ -280,7 +280,7 @@ function discordMarkdown(topic, curr, total) {
         text += " _**Impact:**_ " + topic['impact'] + "\n";
     }
     if(topic["moreInfo"] !== "") {
-        text += " _**More Info:**_ " + topic['moreInfo'] + "\n";
+        text += "[More Info](" + topic['moreInfo'] + ")\n";
     }
     let moreInfoItems = topic['moreInfoItems']
     if(moreInfoItems.length > 0) {
@@ -336,7 +336,7 @@ function gmailMarkdown(topic) {
     details.appendChild(impact);
 
     let moreInfo = document.createElement("li");
-    moreInfo.innerHTML = "<i>More Info:</i> " + topic["moreInfo"];
+    moreInfo.innerHTML = "<a href='" + topic["moreInfo"] + "'>More Info</a>";
     details.appendChild(moreInfo);
 
     let moreInfoItems = topic['moreInfoItems']
