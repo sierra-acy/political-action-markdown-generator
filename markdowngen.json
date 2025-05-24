@@ -1,0 +1,37 @@
+{
+    "name": "Political Action Markdown Generator",
+    "short_name": "Markdown",
+    "description": "Generate markdown to share political action items. Works for Slack, Discord, and Gmail.",
+    "start_url": "/",
+    "display": "standalone",
+    "icons": [
+    {
+      "src": "icons/united-states-flag-icon-cropped.ico",
+      "sizes": "33x33"
+    },
+    {
+      "src": "icons/united-states-flag-icon-extrasmall.svg",
+      "sizes": "72x50"
+    }, 
+    {
+      "src": "icons/united-states-flag-icon-medium.svg",
+      "sizes": "128x88",
+      "purpose": "any"
+    }
+  ],
+   "screenshots": [
+        {
+        "src": "screenshots/web.png",
+        "sizes": "933x581",
+        "type": "image/png",
+        "form_factor": "wide",
+        "label": "Web Screenshot"
+        },
+        {
+        "src": "screenshots/phone.png",
+        "sizes": "357x487",
+        "type": "image/png",
+        "label": "Mobile Screenshot"
+        }
+    ]
+}
