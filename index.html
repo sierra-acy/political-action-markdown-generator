@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Markdown Generator</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <h1>Markdown Generator</h1>
+        <h2>Call Your Representatives Form</h2>
+        <form id="callRepsForm">
+            <button class="hidden" type="button" id="edit-call-reps" onclick="enableFields(event)" name="0">Edit</button>
+            <button class="hidden" type="button" id="save-call-reps" onclick="saveFields(event)" name="0">Save</button>
+            <fieldset id="0">
+                <p>
+                    <label for="subject">Subject</label> <input type="text" id="subject" required />
+                </p>
+                <p>
+                    <label for="rec">Recommending Organization</label> <input type="text" id="rec" required />
+                </p>
+                <p>
+                    <legend for="who-to-call">Who To Call</legend>
+                    <p class="popuptext" id="call-reps-popup">Please choose at least one.</p>
+                    <input type="checkbox" id="call-rep" value="Representative"> <label for="call-rep">Representative</label>
+                    <input type="checkbox" id="call-senators" value="Senators"> <label for="call-senators">Senators</label>
+                </p>
+                <p>
+                    <!-- onclick add bullet, call func to add new text field before button-->
+                    <label for="cta">Call to Action</label> <input type="text" id="cta" required> <input type="button" id="cta-btn" value="Add Bullet" onclick="addBullet(event)">
+                </p>
+                <ul class="hidden" id="cta-bullets">Enter more info below</ul>
+                <p>
+                    <label for="impact">Impact</label> <input type="text" id="impact">
+                </p>
+                <p>
+                    <!-- onclick add bullet, call func to add new text field before button-->
+                    <label for="more-info">More Info</label> <input type="text" id="more-info"> <input type="button" id="more-info-btn" value="Add Bullet" onclick="addBullet(event)">
+                </p>
+                <ul class="hidden" id="cta-bullets">Enter more info below</ul>
+            </fieldset>
+            <p>
+                <!-- onclick add topic, insert another fieldset-->
+                <button type="submit" id="add-topic">Add Another Topic</button> <button type="submit" id="gen-markdown">Generate Markdown</button>
+            </p>
+        </form>
+        <section id="markdown" class="hidden">
+            <button type="button" onclick="copyToClipboard(event)" id="slack-btn">Copy Slack Markdown</button>
+            <div class="markdown" id="slack"></div>
+            <button type="button" onclick="copyToClipboard(event)" id="discord-btn">Copy Discord Markdown</button>
+            <div class="markdown" id="discord"></div>
+            <button type="button" onclick="copyToClipboard(event)" id="gmail-btn">Copy Gmail Markdown</button>
+            <div class="markdown" id="gmail"></div>
+        </section>
+        <script src="app.js" defer></script>
+    </body>
+</html>

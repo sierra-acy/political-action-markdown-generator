@@ -1,0 +1,29 @@
+<button class="hidden" type="button" id="edit-call-reps" onclick="enableFields(event)">Edit</button>
+<button class="hidden" type="button" id="save-call-reps" onclick="saveFields(event)">Save</button>
+<fieldset>
+    <p>
+        <label for="subject">Subject</label> <input type="text" id="subject" required />
+    </p>
+    <p>
+        <label for="rec">Recommending Organization</label> <input type="text" id="rec" required />
+    </p>
+    <p>
+        <legend for="who-to-call">Who To Call</legend>
+        <p class="popuptext" name="call-reps-popup">Please choose at least one.</p>
+        <input type="checkbox" name="call-rep" value="Representative"> <label for="call-rep">Representative</label>
+        <input type="checkbox" name="call-senators" value="Senators"> <label for="call-senators">Senators</label>
+    </p>
+    <p>
+        <!-- onclick add bullet, call func to add new text field before button-->
+        <label for="cta">Call to Action</label> <input type="text" id="cta" required> <input type="button" id="cta-btn" value="Add Bullet" onclick="addBullet(event)">
+    </p>
+    <ul class="hidden" id="cta-bullets">Enter more info below</ul>
+    <p>
+        <label for="impact">Impact</label> <input type="text" id="impact">
+    </p>
+    <p>
+        <!-- onclick add bullet, call func to add new text field before button-->
+        <label for="more-info">More Info</label> <input type="text" id="more-info"> <input type="button" id="more-info-btn" value="Add Bullet" onclick="addBullet(event)">
+    </p>
+    <ul class="hidden" id="cta-bullets">Enter more info below</ul>
+</fieldset>
