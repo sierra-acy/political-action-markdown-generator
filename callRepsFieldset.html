@@ -23,6 +23,7 @@
     </p>
     <p>
         <!-- onclick add bullet, call func to add new text field before button-->
-        <label for="more-info">More Info</label> <input type="text" id="more-info"> <input type="button" value="Add Bullet">
+        <label for="more-info">More Info</label> <input type="text" id="more-info"> <input type="button" id="more-info-btn" value="Add Bullet" onclick="addBullet(event)">
     </p>
+    <ul class="hidden" id="cta-bullets">Enter more info below</ul>
 </fieldset>

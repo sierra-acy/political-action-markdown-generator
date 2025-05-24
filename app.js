@@ -78,8 +78,6 @@ function storeNewTopic() {
     let fieldsToStore = document.getElementById(currId);
 
     let fieldData = getFieldValues(fieldsToStore)
-    // const moreInfoBullets = moreInfoElem.children;
-    // const ctaBullets = ctaElem.children;
 
     if(!validateCheckboxes(fieldData)) {
         return;
@@ -116,13 +114,19 @@ function getFieldValues(fieldsToStore) {
     const ctaBullets = fieldsToStore.children[10].children;
     const impact = fieldsToStore.children[11].children[1].value;
     const moreInfo = fieldsToStore.children[12].children[1].value;
+    const moreInfoBullets = fieldsToStore.children[13].children;
 
     let ctaInfo = [];
     for(let bullet of ctaBullets) {
         ctaInfo.push(bullet.children[0].value);
     }
+
+    let moreInfoItems = [];
+    for(let bullet of moreInfoBullets) {
+        moreInfoItems.push(bullet.children[0].value);
+    }
     
-    return {subject, recommendingOrg, callRep, callSenators, cta, ctaInfo, impact, moreInfo, popup};
+    return {subject, recommendingOrg, callRep, callSenators, cta, ctaInfo, impact, moreInfo, moreInfoItems, popup};
 }
 
 function validateCheckboxes(dataObj){ // validate checkboxes
@@ -236,6 +240,12 @@ function slackMarkdown(topic) {
     if(topic["moreInfo"] !== "") {
         text += " _More Info:_ " + topic['moreInfo'] + "\n";
     }
+    let moreInfoItems = topic['moreInfoItems']
+    if(moreInfoItems.length > 0) {
+        for(let bullet of moreInfoItems) {
+            text += "    - " + bullet + "\n";
+        }
+    }
     text+= "\n";
     return text;
 }
@@ -267,6 +277,12 @@ function discordMarkdown(topic, curr, total) {
     }
     if(topic["moreInfo"] !== "") {
         text += " _**More Info:**_ " + topic['moreInfo'] + "\n";
+    }
+    let moreInfoItems = topic['moreInfoItems']
+    if(moreInfoItems.length > 0) {
+        for(let bullet of moreInfoItems) {
+            text += "- " + bullet + "\n";
+        }
     }
     text+= "\n";
     return text;
@@ -319,6 +335,17 @@ function gmailMarkdown(topic) {
     moreInfo.innerHTML = "<i>More Info:</i> " + topic["moreInfo"];
     details.appendChild(moreInfo);
 
+    let moreInfoItems = topic['moreInfoItems']
+    if(moreInfoItems.length > 0) {
+        let bullets = document.createElement("ul");
+        for(let info of moreInfoItems) {
+            let bullet = document.createElement("li");
+            bullet.innerHTML = info;
+            bullets.appendChild(bullet);
+        }
+        moreInfo.appendChild(bullets);
+    }
+
     topLevel.appendChild(details);
     return topLevel;
 }
@@ -326,15 +353,19 @@ function gmailMarkdown(topic) {
 function addBullet(event) {
     console.log("ADD BULLET ", event.target);
     let fieldset = event.target.parentElement.parentElement;
-    
+    let bullets;
+    if(event.target.id === "cta-btn") {
+        bullets = fieldset.children[10];
+    } else if (event.target.id === "more-info-btn") {
+        bullets = fieldset.children[13];
+    }
     // get ul with id cta-bullets
-    let ctaBullets = fieldset.children[10];
-    let ctaBullet = document.createElement("li");
+    // let ctaBullets = fieldset.children[10];
+    let bullet = document.createElement("li");
     let newInput = document.createElement("input");
     newInput.type = "text";
-    ctaBullet.appendChild(newInput);
-    ctaBullets.removeAttribute("class");
-    ctaBullets.appendChild(ctaBullet);
+    bullet.appendChild(newInput);
+    bullets.removeAttribute("class");
+    bullets.appendChild(bullet);
     
-
 }
