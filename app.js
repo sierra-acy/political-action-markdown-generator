@@ -377,15 +377,18 @@ function copyToClipboard(event) {
     let elemToCopy;
     if (event.target.id === 'slack-btn') {
         elemToCopy = document.getElementById("slack");
+        navigator.clipboard.writeText(elemToCopy.innerText);
     } else if (event.target.id === 'discord-btn') {
         elemToCopy = document.getElementById("discord");
+        navigator.clipboard.writeText(elemToCopy.innerText);
     } else if (event.target.id === 'gmail-btn') {
         elemToCopy = document.getElementById("gmail");
+        const blob = new Blob([elemToCopy.innerHTML], {type: "text/html"});
+        const data = [new ClipboardItem({ 'text/html': blob })];
+        navigator.clipboard.write(data);
     } else {
         console.warn(event.target.id + " not recognized.");
     }
 
-    navigator.clipboard.writeText(elemToCopy.innerText);
     alert("Copied!");
-
 }
