@@ -181,6 +181,10 @@ async function addTopicForm(url, elementId) {
 }
 
 function generateMarkdown() {
+    // disable entire form
+    let form = document.getElementById("callRepsForm");
+    form.setAttribute("inert", "");
+
     let slackText = "*Call Your Reps*\n";
     let discordText = "# **Call Your Reps**\n";
 
@@ -359,8 +363,7 @@ function addBullet(event) {
     } else if (event.target.id === "more-info-btn") {
         bullets = fieldset.children[13];
     }
-    // get ul with id cta-bullets
-    // let ctaBullets = fieldset.children[10];
+    
     let bullet = document.createElement("li");
     let newInput = document.createElement("input");
     newInput.type = "text";
