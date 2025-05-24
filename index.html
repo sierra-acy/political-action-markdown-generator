@@ -45,11 +45,11 @@
             </p>
         </form>
         <section id="markdown" class="hidden">
-            <label for="slack">Slack</label>
+            <button type="button" onclick="copyToClipboard(event)" id="slack-btn">Copy Slack Markdown</button>
             <div class="markdown" id="slack"></div>
-            <label for="discord">Discord</label>
+            <button type="button" onclick="copyToClipboard(event)" id="discord-btn">Copy Discord Markdown</button>
             <div class="markdown" id="discord"></div>
-            <label for="gmail">Gmail</label>
+            <button type="button" onclick="copyToClipboard(event)" id="gmail-btn">Copy Gmail Markdown</button>
             <div class="markdown" id="gmail"></div>
         </section>
         <script src="app.js" defer></script>

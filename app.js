@@ -358,7 +358,7 @@ function addBullet(event) {
     console.log("ADD BULLET ", event.target);
     let fieldset = event.target.parentElement.parentElement;
     let bullets;
-    if(event.target.id === "cta-btn") {
+    if (event.target.id === "cta-btn") {
         bullets = fieldset.children[10];
     } else if (event.target.id === "more-info-btn") {
         bullets = fieldset.children[13];
@@ -371,4 +371,21 @@ function addBullet(event) {
     bullets.removeAttribute("class");
     bullets.appendChild(bullet);
     
+}
+
+function copyToClipboard(event) {
+    let elemToCopy;
+    if (event.target.id === 'slack-btn') {
+        elemToCopy = document.getElementById("slack");
+    } else if (event.target.id === 'discord-btn') {
+        elemToCopy = document.getElementById("discord");
+    } else if (event.target.id === 'gmail-btn') {
+        elemToCopy = document.getElementById("gmail");
+    } else {
+        console.warn(event.target.id + " not recognized.");
+    }
+
+    navigator.clipboard.writeText(elemToCopy.innerText);
+    alert("Copied!");
+
 }
