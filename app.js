@@ -113,11 +113,16 @@ function getFieldValues(fieldsToStore) {
     const callRep = fieldsToStore.children[4].checked;
     const callSenators = fieldsToStore.children[6].checked;
     const cta = fieldsToStore.children[9].children[1].value;
-    const impact = fieldsToStore.children[10].children[1].value;
-    const moreInfo = fieldsToStore.children[11].children[1].value;
-    
+    const ctaBullets = fieldsToStore.children[10].children;
+    const impact = fieldsToStore.children[11].children[1].value;
+    const moreInfo = fieldsToStore.children[12].children[1].value;
 
-    return {subject, recommendingOrg, callRep, callSenators, cta, impact, moreInfo, popup};
+    let ctaInfo = [];
+    for(let bullet of ctaBullets) {
+        ctaInfo.push(bullet.children[0].value);
+    }
+    
+    return {subject, recommendingOrg, callRep, callSenators, cta, ctaInfo, impact, moreInfo, popup};
 }
 
 function validateCheckboxes(dataObj){ // validate checkboxes
@@ -219,6 +224,12 @@ function slackMarkdown(topic) {
     }
     text += " _Who to Call:_ " + whoToCall + "\n";
     text += " _CTA:_ " + topic['cta'] + "\n";
+    let ctaInfo = topic['ctaInfo']
+    if(ctaInfo.length > 0) {
+        for(let bullet of ctaInfo) {
+            text += "    - " + bullet + "\n";
+        }
+    }
     if(topic["impact"] !== "") {
         text += " _Impact:_ " + topic['impact'] + "\n";
     }
@@ -245,6 +256,12 @@ function discordMarkdown(topic, curr, total) {
     }
     text += " _**Who to Call:**_ " + whoToCall + "\n";
     text += " _**CTA:**_ " + topic['cta'] + "\n";
+    let ctaInfo = topic['ctaInfo']
+    if(ctaInfo.length > 0) {
+        for(let bullet of ctaInfo) {
+            text += "- " + bullet + "\n";
+        }
+    }
     if(topic["impact"] !== "") {
         text += " _**Impact:**_ " + topic['impact'] + "\n";
     }
@@ -283,6 +300,17 @@ function gmailMarkdown(topic) {
     cta.innerHTML = "<i>CTA:</i> " + topic["cta"];
     details.appendChild(cta);
 
+    let ctaInfo = topic['ctaInfo']
+    if(ctaInfo.length > 0) {
+        let bullets = document.createElement("ul");
+        for(let info of ctaInfo) {
+            let bullet = document.createElement("li");
+            bullet.innerHTML = info;
+            bullets.appendChild(bullet);
+        }
+        cta.appendChild(bullets);
+    }
+
     let impact = document.createElement("li");
     impact.innerHTML = "<i>Impact:</i> " + topic["impact"];
     details.appendChild(impact);
@@ -293,4 +321,20 @@ function gmailMarkdown(topic) {
 
     topLevel.appendChild(details);
     return topLevel;
+}
+
+function addBullet(event) {
+    console.log("ADD BULLET ", event.target);
+    let fieldset = event.target.parentElement.parentElement;
+    
+    // get ul with id cta-bullets
+    let ctaBullets = fieldset.children[10];
+    let ctaBullet = document.createElement("li");
+    let newInput = document.createElement("input");
+    newInput.type = "text";
+    ctaBullet.appendChild(newInput);
+    ctaBullets.removeAttribute("class");
+    ctaBullets.appendChild(ctaBullet);
+    
+
 }

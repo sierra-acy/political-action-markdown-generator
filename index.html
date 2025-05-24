@@ -27,8 +27,9 @@
                 </p>
                 <p>
                     <!-- onclick add bullet, call func to add new text field before button-->
-                    <label for="cta">Call to Action</label> <input type="text" id="cta" required> <input type="button" value="Add Bullet">
+                    <label for="cta">Call to Action</label> <input type="text" id="cta" required> <input type="button" id="cta-btn" value="Add Bullet" onclick="addBullet(event)">
                 </p>
+                <ul class="hidden" id="cta-bullets">Enter more info below</ul>
                 <p>
                     <label for="impact">Impact</label> <input type="text" id="impact">
                 </p>
