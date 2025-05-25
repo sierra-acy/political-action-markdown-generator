@@ -10,12 +10,8 @@
       "sizes": "33x33"
     },
     {
-      "src": "icons/united-states-flag-icon-extrasmall.svg",
-      "sizes": "72x50"
-    }, 
-    {
-      "src": "icons/united-states-flag-icon-medium.svg",
-      "sizes": "128x88",
+      "src": "icons/distress_flag_150.png",
+      "sizes": "150x150",
       "purpose": "any"
     }
   ],
