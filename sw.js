@@ -1,4 +1,4 @@
-const VERSION = "v1";
+const VERSION = "v1.1";
 const CACHE_NAME = `markdown-gen-${VERSION}`;
 
 
@@ -9,7 +9,7 @@ const APP_STATIC_RESOURCES = [
   "/style.css",
   "/app.js",
   "/markdowngen.json",
-  "/icons/united-states-flag-icon-small.png",
+  "/icons/distress_flag_150.png",
 ];
 
 self.addEventListener("install", (event) => {
