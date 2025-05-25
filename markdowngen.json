@@ -6,10 +6,6 @@
     "display": "standalone",
     "icons": [
     {
-      "src": "icons/united-states-flag-icon-cropped.ico",
-      "sizes": "33x33"
-    },
-    {
       "src": "icons/distress_flag_150.png",
       "sizes": "150x150",
       "purpose": "any"
