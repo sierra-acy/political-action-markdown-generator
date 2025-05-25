@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width" />
         <title>Markdown Generator</title>
         <link rel="stylesheet" href="style.css" />
+        <link rel="manifest" href="markdowngen.json" />
+        <link rel="icon" href="icons/united-states-flag-icon.svg" />
     </head>
     <body>
         <h1>Markdown Generator</h1>
@@ -53,5 +55,12 @@
             <div class="markdown" id="gmail"></div>
         </section>
         <script src="app.js" defer></script>
+        <!-- Register the app's service worker. -->
+        <script>
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.register("sw.js");
+            }
+        </script>
+
     </body>
 </html>
