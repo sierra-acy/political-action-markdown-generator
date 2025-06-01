@@ -389,6 +389,4 @@ function copyToClipboard(event) {
     } else {
         console.warn(event.target.id + " not recognized.");
     }
-
-    alert("Copied!");
 }

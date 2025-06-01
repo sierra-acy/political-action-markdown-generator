@@ -2,7 +2,7 @@
     "name": "Political Action Markdown Generator",
     "short_name": "Markdown",
     "description": "Generate markdown to share political action items. Works for Slack, Discord, and Gmail.",
-    "start_url": "/political-action-markdown-generator",
+    "start_url": "/",
     "display": "standalone",
     "icons": [
     {
