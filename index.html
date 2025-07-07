@@ -6,7 +6,7 @@
         <title>Markdown Generator</title>
         <link rel="stylesheet" href="style.css" />
         <link rel="manifest" href="markdowngen.json" />
-        <link rel="icon" href="icons/united-states-flag-icon.svg" />
+        <link rel="icon" href="icons/distress_flag_150.png" />
     </head>
     <body>
         <h1>Markdown Generator</h1>
@@ -56,9 +56,18 @@
         </section>
         <script src="app.js" defer></script>
         <!-- Register the app's service worker. -->
-        <script>
+        <script type="text/javascript">
             if ("serviceWorker" in navigator) {
-                navigator.serviceWorker.register("sw.js");
+                navigator.serviceWorker.register("./sw.js").then(
+                    (registration) => {
+                        console.log("Service worker registration successful:", registration);
+                    },
+                    (error) => {
+                        console.error(`Service worker registration failed: ${error}`);
+                    },
+                );
+            } else {
+                console.error("Service workers are not supported.");
             }
         </script>
 
